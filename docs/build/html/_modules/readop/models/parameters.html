@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>readop.models.parameters &mdash; ReadOp  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> ReadOp
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ReadOp</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>readop.models.parameters</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for readop.models.parameters</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains class for storing ddboost Parameters.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">readop.utility</span> <span class="k">import</span> <span class="n">validator</span>
+
+
+<div class="viewcode-block" id="Parameters"><a class="viewcode-back" href="../../../readop.models.parameters.html#readop.models.parameters.Parameters">[docs]</a><span class="k">class</span> <span class="nc">Parameters</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Stores ddboost parameters.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">PARAMETER_LIST_LEN</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">7</span>
+
+    <span class="n">DEFAULT_ACCESS_PATTERN</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">APD_DATA_SEQ_THRESHOLD</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">INIT_IO_REGION_SIZE</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2048</span>
+    <span class="n">MAX_IO_REGIONS</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16</span>
+    <span class="n">APD_ACCESS_SEQ_THRESHOLD</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">80</span>
+    <span class="n">APD_ACCESS_RANDOM_THRESHOLD</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">70</span>
+    <span class="n">APD_ACCESS_RANDOM_INC_THRESHOLD</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">90</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">default_access_pattern</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEFAULT_ACCESS_PATTERN</span><span class="p">,</span>
+        <span class="n">apd_data_seq_threshold</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">APD_DATA_SEQ_THRESHOLD</span><span class="p">,</span>
+        <span class="n">init_io_region_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">INIT_IO_REGION_SIZE</span><span class="p">,</span>
+        <span class="n">max_io_regions</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">MAX_IO_REGIONS</span><span class="p">,</span>
+        <span class="n">apd_access_seq_threshold</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">APD_ACCESS_SEQ_THRESHOLD</span><span class="p">,</span>
+        <span class="n">apd_access_random_threshold</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">APD_ACCESS_RANDOM_THRESHOLD</span><span class="p">,</span>
+        <span class="n">apd_access_random_inc_threshold</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">APD_ACCESS_RANDOM_INC_THRESHOLD</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the stored values using the provided arguments.</span>
+
+<span class="sd">        :param default_access_pattern: Initial pattern mode (0 = sequential, 1 = random, 2 = random-incremental).</span>
+<span class="sd">        :param apd_data_seq_threshold: Threshold for data accesses to be considered sequential.</span>
+<span class="sd">        :param init_io_region_size: Initial (minimum) APD region size in MB.</span>
+<span class="sd">        :param max_io_regions: Max APD regions to detect in a file.</span>
+<span class="sd">        :param apd_access_seq_threshold: Percentage of IOs needed to trigger sequential mode.</span>
+<span class="sd">        :param apd_access_random_threshold: Percentage of IOs needed to trigger random mode.</span>
+<span class="sd">        :param apd_access_random_inc_threshold: Percentage of IOs needed to trigger random-incremental mode.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_access_pattern</span> <span class="o">=</span> <span class="n">default_access_pattern</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">apd_data_seq_threshold</span> <span class="o">=</span> <span class="n">apd_data_seq_threshold</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_io_region_size</span> <span class="o">=</span> <span class="n">init_io_region_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_io_regions</span> <span class="o">=</span> <span class="n">max_io_regions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">apd_access_seq_threshold</span> <span class="o">=</span> <span class="n">apd_access_seq_threshold</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">apd_access_random_threshold</span> <span class="o">=</span> <span class="n">apd_access_random_threshold</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">apd_access_random_inc_threshold</span> <span class="o">=</span> <span class="n">apd_access_random_inc_threshold</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">default_access_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initial pattern mode (0 = sequential, 1 = random, 2 = random-incremental).</span>
+
+<span class="sd">        :getter: Gets the initial pattern mode.</span>
+<span class="sd">        :setter: Sets the initial pattern mode.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__default_access_pattern</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">apd_data_seq_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Threshold for data accesses to be considered sequential.</span>
+
+<span class="sd">        :getter: Gets the data sequential threshold.</span>
+<span class="sd">        :setter: Sets the data sequential threshold.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__apd_data_seq_threshold</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">init_io_region_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initial (minimum) APD region size in MB.</span>
+
+<span class="sd">        :getter: Gets the initial APD region size.</span>
+<span class="sd">        :setter: Sets the initial APD region size.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__init_io_region_size</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">max_io_regions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Max APD regions to detect in a file.</span>
+
+<span class="sd">        :getter: Gets the max APD regions.</span>
+<span class="sd">        :setter: Sets the max APD regions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__max_io_regions</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">apd_access_seq_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Percentage of IOs needed to trigger sequential mode.</span>
+
+<span class="sd">        :getter: Gets the sequential access threshold.</span>
+<span class="sd">        :setter: Sets the sequential access threshold.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__apd_access_seq_threshold</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">apd_access_random_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Percentage of IOs needed to trigger random mode.</span>
+
+<span class="sd">        :getter: Gets the random access threshold.</span>
+<span class="sd">        :setter: Sets the random access threshold.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__apd_access_random_threshold</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">apd_access_random_inc_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Percentage of IOs needed to trigger random-incremental mode.</span>
+
+<span class="sd">        :getter: Gets the random-incremental access threshold.</span>
+<span class="sd">        :setter: Sets the random-incremental access threshold.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__apd_access_random_inc_threshold</span>
+    
+    <span class="nd">@default_access_pattern</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">default_access_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">default_access_pattern</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__default_access_pattern</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate_int_geq_zero</span><span class="p">(</span><span class="n">default_access_pattern</span><span class="p">)</span>
+    
+    <span class="nd">@apd_data_seq_threshold</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">apd_data_seq_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">apd_data_seq_threshold</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__apd_data_seq_threshold</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate_int_geq_zero</span><span class="p">(</span><span class="n">apd_data_seq_threshold</span><span class="p">)</span>
+    
+    <span class="nd">@init_io_region_size</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">init_io_region_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">init_io_region_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__init_io_region_size</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate_int_geq_zero</span><span class="p">(</span><span class="n">init_io_region_size</span><span class="p">)</span>
+    
+    <span class="nd">@max_io_regions</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">max_io_regions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_io_regions</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__max_io_regions</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate_int_geq_zero</span><span class="p">(</span><span class="n">max_io_regions</span><span class="p">)</span>
+    
+    <span class="nd">@apd_access_seq_threshold</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">apd_access_seq_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">apd_access_seq_threshold</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__apd_access_seq_threshold</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate_int_geq_zero</span><span class="p">(</span><span class="n">apd_access_seq_threshold</span><span class="p">)</span>
+    
+    <span class="nd">@apd_access_random_threshold</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">apd_access_random_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">apd_access_random_threshold</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__apd_access_random_threshold</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate_int_geq_zero</span><span class="p">(</span><span class="n">apd_access_random_threshold</span><span class="p">)</span>
+    
+    <span class="nd">@apd_access_random_inc_threshold</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">apd_access_random_inc_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">apd_access_random_inc_threshold</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__apd_access_random_inc_threshold</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate_int_geq_zero</span><span class="p">(</span><span class="n">apd_access_random_inc_threshold</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Parameters.from_list"><a class="viewcode-back" href="../../../readop.models.parameters.html#readop.models.parameters.Parameters.from_list">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_list</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">parameter_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameter_list</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">length</span> <span class="o">!=</span> <span class="mi">7</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;Parameter list must have </span><span class="si">{0}</span><span class="s1"> elements, </span><span class="si">{1}</span><span class="s1"> provided.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">Parameters</span><span class="o">.</span><span class="n">PARAMETER_LIST_LEN</span><span class="p">),</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">parameter_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">parameter_list</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">parameter_list</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+            <span class="n">parameter_list</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+            <span class="n">parameter_list</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+            <span class="n">parameter_list</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+            <span class="n">parameter_list</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+        <span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="s1">&#39;Parameters {</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;    default_access_pattern:          &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">default_access_pattern</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;    apd_data_seq_threshold:          &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">apd_data_seq_threshold</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;    init_io_region_size:             &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">init_io_region_size</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;    max_io_regions:                  &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_io_regions</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;    apd_access_seq_threshold:        &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">apd_access_seq_threshold</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;    apd_access_random_threshold:     &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">apd_access_random_threshold</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;    apd_access_random_inc_threshold: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">apd_access_random_inc_threshold</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;}&#39;</span>
+        <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Team 26
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

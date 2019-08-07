@@ -1,0 +1,272 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>readop.utility.config &mdash; ReadOp  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> ReadOp
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ReadOp</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>readop.utility.config</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for readop.utility.config</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+
+<div class="viewcode-block" id="read_configuration_file"><a class="viewcode-back" href="../../../readop.utility.config.html#readop.utility.config.read_configuration_file">[docs]</a><span class="k">def</span> <span class="nf">read_configuration_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;readop/config.yaml&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">global</span> <span class="n">configuration_data</span>
+                <span class="n">configuration_data</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">yaml</span><span class="o">.</span><span class="n">YAMLError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_config"><a class="viewcode-back" href="../../../readop.utility.config.html#readop.utility.config.get_config">[docs]</a><span class="k">def</span> <span class="nf">get_config</span><span class="p">(</span><span class="o">*</span><span class="n">config_path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">global</span> <span class="n">configuration_data</span><span class="p">,</span> <span class="n">configuration_was_loaded</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">configuration_was_loaded</span><span class="p">:</span>
+        <span class="n">read_configuration_file</span><span class="p">()</span>
+        <span class="n">configuration_was_loaded</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">configuration_data</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">config_path</span><span class="p">:</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">config</span></div>
+
+
+<div class="viewcode-block" id="get_ddve_host"><a class="viewcode-back" href="../../../readop.utility.config.html#readop.utility.config.get_ddve_host">[docs]</a><span class="k">def</span> <span class="nf">get_ddve_host</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">get_config</span><span class="p">(</span><span class="s1">&#39;ddve&#39;</span><span class="p">,</span> <span class="s1">&#39;host&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_ddve_username"><a class="viewcode-back" href="../../../readop.utility.config.html#readop.utility.config.get_ddve_username">[docs]</a><span class="k">def</span> <span class="nf">get_ddve_username</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">get_config</span><span class="p">(</span><span class="s1">&#39;ddve&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_ddve_password"><a class="viewcode-back" href="../../../readop.utility.config.html#readop.utility.config.get_ddve_password">[docs]</a><span class="k">def</span> <span class="nf">get_ddve_password</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">get_config</span><span class="p">(</span><span class="s1">&#39;ddve&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_ddve_rest_port"><a class="viewcode-back" href="../../../readop.utility.config.html#readop.utility.config.get_ddve_rest_port">[docs]</a><span class="k">def</span> <span class="nf">get_ddve_rest_port</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">get_config</span><span class="p">(</span><span class="s1">&#39;ddve&#39;</span><span class="p">,</span> <span class="s1">&#39;rest_port&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_database_host"><a class="viewcode-back" href="../../../readop.utility.config.html#readop.utility.config.get_database_host">[docs]</a><span class="k">def</span> <span class="nf">get_database_host</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">get_config</span><span class="p">(</span><span class="s1">&#39;database&#39;</span><span class="p">,</span> <span class="s1">&#39;host&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_database_port"><a class="viewcode-back" href="../../../readop.utility.config.html#readop.utility.config.get_database_port">[docs]</a><span class="k">def</span> <span class="nf">get_database_port</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">get_config</span><span class="p">(</span><span class="s1">&#39;database&#39;</span><span class="p">,</span> <span class="s1">&#39;port&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_database_username"><a class="viewcode-back" href="../../../readop.utility.config.html#readop.utility.config.get_database_username">[docs]</a><span class="k">def</span> <span class="nf">get_database_username</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">get_config</span><span class="p">(</span><span class="s1">&#39;database&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_database_password"><a class="viewcode-back" href="../../../readop.utility.config.html#readop.utility.config.get_database_password">[docs]</a><span class="k">def</span> <span class="nf">get_database_password</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">get_config</span><span class="p">(</span><span class="s1">&#39;database&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_database_name"><a class="viewcode-back" href="../../../readop.utility.config.html#readop.utility.config.get_database_name">[docs]</a><span class="k">def</span> <span class="nf">get_database_name</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">get_config</span><span class="p">(</span><span class="s1">&#39;database&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_debug_database_engine_echo"><a class="viewcode-back" href="../../../readop.utility.config.html#readop.utility.config.get_debug_database_engine_echo">[docs]</a><span class="k">def</span> <span class="nf">get_debug_database_engine_echo</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">get_config</span><span class="p">(</span><span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="s1">&#39;database_engine_echo&#39;</span><span class="p">)</span></div>
+
+
+<span class="n">configuration_was_loaded</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">configuration_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ddve&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;192.168.41.52&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;sysadmin&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;sdcTeam21&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;rest_port&#39;</span><span class="p">:</span> <span class="s1">&#39;3009&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;database&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;port&#39;</span><span class="p">:</span> <span class="s1">&#39;3306&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;sdcTeam21!&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;ReadOp&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;debug&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;database_engine_echo&#39;</span><span class="p">:</span> <span class="kc">False</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Team 26
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

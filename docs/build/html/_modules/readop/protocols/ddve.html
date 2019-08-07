@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>readop.protocols.ddve &mdash; ReadOp  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> ReadOp
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ReadOp</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>readop.protocols.ddve</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for readop.protocols.ddve</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Interactions with DDVE Parameter system by retrieving results.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">readop.models.ddve_output</span> <span class="k">import</span> <span class="n">DDVEOutput</span>
+
+
+<div class="viewcode-block" id="DDVEClient"><a class="viewcode-back" href="../../../readop.protocols.ddve.html#readop.protocols.ddve.DDVEClient">[docs]</a><span class="k">class</span> <span class="nc">DDVEClient</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handles credential management and re-authentication for ssh communication.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ddve</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the ddve protocol instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ddve</span> <span class="o">=</span> <span class="n">ddve</span>
+    
+<div class="viewcode-block" id="DDVEClient.createStorageUnit"><a class="viewcode-back" href="../../../readop.protocols.ddve.html#readop.protocols.ddve.DDVEClient.createStorageUnit">[docs]</a>    <span class="k">def</span> <span class="nf">createStorageUnit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">su_name</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the message for creating a storage unit.</span>
+
+<span class="sd">        :param su_name: name of this storage unit</span>
+<span class="sd">        :param user: user the storage unit is created for</span>
+<span class="sd">        :return: lines containing the return message from correlated command in ddve</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">stdin</span><span class="p">,</span><span class="n">stdout</span><span class="p">,</span><span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddve</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s2">&quot;ddboost storage-unit create </span><span class="si">%s</span><span class="s2"> user </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">su_name</span><span class="p">,</span> <span class="n">user</span><span class="p">))</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">DDVEOutput</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">lines</span></div>
+
+<div class="viewcode-block" id="DDVEClient.deleteStorageUnit"><a class="viewcode-back" href="../../../readop.protocols.ddve.html#readop.protocols.ddve.DDVEClient.deleteStorageUnit">[docs]</a>    <span class="k">def</span> <span class="nf">deleteStorageUnit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">su_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the message for deleting a storage unit.</span>
+
+<span class="sd">        :param su_name: name of this storage unit</span>
+<span class="sd">        :return: lines containing the return message from correlated command in ddve</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">stdin</span><span class="p">,</span><span class="n">stdout</span><span class="p">,</span><span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddve</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s2">&quot;ddboost storage-unit delete </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">su_name</span><span class="p">))</span>
+        <span class="n">stdin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;yes&quot;</span><span class="p">)</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">DDVEOutput</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">lines</span></div>
+
+<div class="viewcode-block" id="DDVEClient.getStorageUnits"><a class="viewcode-back" href="../../../readop.protocols.ddve.html#readop.protocols.ddve.DDVEClient.getStorageUnits">[docs]</a>    <span class="k">def</span> <span class="nf">getStorageUnits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the message for retrieving a storage unit.</span>
+
+<span class="sd">        :return: lines containing the return message from correlated command in ddve</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># System is ready to retrieve data</span>
+        <span class="n">stdin</span><span class="p">,</span><span class="n">stdout</span><span class="p">,</span><span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddve</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s2">&quot;ddboost storage-unit show&quot;</span><span class="p">)</span>
+
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">DDVEOutput</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">lines</span></div>
+
+<div class="viewcode-block" id="DDVEClient.getMTrees"><a class="viewcode-back" href="../../../readop.protocols.ddve.html#readop.protocols.ddve.DDVEClient.getMTrees">[docs]</a>    <span class="k">def</span> <span class="nf">getMTrees</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the message for retrieving the MTrees.</span>
+
+<span class="sd">        :return: lines containing the return message from correlated command in ddve</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># System is ready to retrieve data</span>
+        <span class="n">stdin</span><span class="p">,</span><span class="n">stdout</span><span class="p">,</span><span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddve</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s2">&quot;mtree list&quot;</span><span class="p">)</span>
+
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">DDVEOutput</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">lines</span></div>
+
+<div class="viewcode-block" id="DDVEClient.garbageCollection"><a class="viewcode-back" href="../../../readop.protocols.ddve.html#readop.protocols.ddve.DDVEClient.garbageCollection">[docs]</a>    <span class="k">def</span> <span class="nf">garbageCollection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the message for doing garbage collection.</span>
+
+<span class="sd">        :return: lines containing the return message from correlated command in ddve</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">stdin</span><span class="p">,</span><span class="n">stdout</span><span class="p">,</span><span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddve</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s2">&quot;filesys clean start&quot;</span><span class="p">)</span>
+
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">DDVEOutput</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">lines</span></div>
+
+<div class="viewcode-block" id="DDVEClient.resetStats"><a class="viewcode-back" href="../../../readop.protocols.ddve.html#readop.protocols.ddve.DDVEClient.resetStats">[docs]</a>    <span class="k">def</span> <span class="nf">resetStats</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the message for resetting the stats in ddve system.</span>
+
+<span class="sd">        :return: lines containing the return message from correlated command in ddve</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># System is ready to retrieve data</span>
+        <span class="n">stdin</span><span class="p">,</span><span class="n">stdout</span><span class="p">,</span><span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddve</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s2">&quot;ddboost reset stats&quot;</span><span class="p">)</span>
+
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">DDVEOutput</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">lines</span></div>
+
+<div class="viewcode-block" id="DDVEClient.getStats"><a class="viewcode-back" href="../../../readop.protocols.ddve.html#readop.protocols.ddve.DDVEClient.getStats">[docs]</a>    <span class="k">def</span> <span class="nf">getStats</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the message for retrieving the stats data from ddve system.</span>
+
+<span class="sd">        :return: lines containing the return message from correlated command in ddve</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># System is ready to retrieve data</span>
+        <span class="n">stdin</span><span class="p">,</span><span class="n">stdout</span><span class="p">,</span><span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddve</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s2">&quot;ddboost show stats&quot;</span><span class="p">)</span>
+
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">DDVEOutput</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">lines</span></div>
+
+<div class="viewcode-block" id="DDVEClient.checkSystemStatus"><a class="viewcode-back" href="../../../readop.protocols.ddve.html#readop.protocols.ddve.DDVEClient.checkSystemStatus">[docs]</a>    <span class="k">def</span> <span class="nf">checkSystemStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the message for checking system status.</span>
+
+<span class="sd">        :return: lines containing the return message from correlated command in ddve</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># System is ready to retrieve data</span>
+        <span class="n">stdin</span><span class="p">,</span><span class="n">stdout</span><span class="p">,</span><span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddve</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s2">&quot;filesys status&quot;</span><span class="p">)</span>
+
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">DDVEOutput</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">lines</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Team 26
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

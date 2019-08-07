@@ -1,0 +1,364 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>readop.models.results module &mdash; ReadOp  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ReadOp
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">readop.models.results module</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ReadOp</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>readop.models.results module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/readop.models.results.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-readop.models.results">
+<span id="readop-models-results-module"></span><h1>readop.models.results module<a class="headerlink" href="#module-readop.models.results" title="Permalink to this headline">¶</a></h1>
+<p>Contains class for storing operation results.</p>
+<dl class="class">
+<dt id="readop.models.results.Results">
+<em class="property">class </em><code class="descclassname">readop.models.results.</code><code class="descname">Results</code><span class="sig-paren">(</span><em>execution_time: int = 0</em>, <em>n_ras: int = 0</em>, <em>n_ra_cbs: int = 0</em>, <em>n_ra_out_of_seq: int = 0</em>, <em>n_ra_buf_waits: int = 0</em>, <em>ra_buf_wait_time: int = 0</em>, <em>ra_data_latency: int = 0</em>, <em>avg_ra_data_latency: int = 0</em>, <em>ddp_readext: int = 0</em>, <em>total_bytes_read: int = 0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/readop/models/results.html#Results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#readop.models.results.Results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Stores operation results obtained through ddboost_stress and the DDVE.</p>
+<dl class="attribute">
+<dt id="readop.models.results.Results.avg_ra_data_latency">
+<code class="descname">avg_ra_data_latency</code><a class="headerlink" href="#readop.models.results.Results.avg_ra_data_latency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Average time spent waiting for read-aheads, this ends up being your data latency divided by the number of read
+aheads completed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Gets the time spent waiting for read-aheads.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets the time spent waiting for read-aheads.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="readop.models.results.Results.ddp_readext">
+<code class="descname">ddp_readext</code><a class="headerlink" href="#readop.models.results.Results.ddp_readext" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the name of the DDBoost asynchronous read RPC. The counter from the CLI shows the number of these RPCs
+that have been sent from clients since the last time it has been cleared. The client does async reads when doing
+read-ahead.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Gets the number of ddp_readext RPC calls made.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets the number of ddp_readext RPC calls made.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="readop.models.results.Results.execution_time">
+<code class="descname">execution_time</code><a class="headerlink" href="#readop.models.results.Results.execution_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Elapsed time in milliseconds required for the operation to complete.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Gets the elapsed time.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets the elapsed time.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="readop.models.results.Results.n_ra_buf_waits">
+<code class="descname">n_ra_buf_waits</code><a class="headerlink" href="#readop.models.results.Results.n_ra_buf_waits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of times reads had to wait on internal buffers for read-ahead.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Gets the number of times reads had to wait.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets the number of times reads had to wait.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="readop.models.results.Results.n_ra_cbs">
+<code class="descname">n_ra_cbs</code><a class="headerlink" href="#readop.models.results.Results.n_ra_cbs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of times read ahead callbacks have been completed. Should be same as n_ras.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Gets the number of times read ahead callbacks have been completed.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets the number of times read ahead callbacks have been completed.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="readop.models.results.Results.n_ra_out_of_seq">
+<code class="descname">n_ra_out_of_seq</code><a class="headerlink" href="#readop.models.results.Results.n_ra_out_of_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of reads that were non-sequential.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Gets the number of reads that were non-sequential.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets the number of reads that were non-sequential.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="readop.models.results.Results.n_ras">
+<code class="descname">n_ras</code><a class="headerlink" href="#readop.models.results.Results.n_ras" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of times the client has started read ahead.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Gets the number of times the client has started read ahead.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets the number of times the client has started read ahead.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="readop.models.results.Results.ra_buf_wait_time">
+<code class="descname">ra_buf_wait_time</code><a class="headerlink" href="#readop.models.results.Results.ra_buf_wait_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time spent waiting for buffers to become available during reads.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Gets the time spent waiting.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets the time spent waiting.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="readop.models.results.Results.ra_data_latency">
+<code class="descname">ra_data_latency</code><a class="headerlink" href="#readop.models.results.Results.ra_data_latency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total time spent waiting for all read-aheads to occur. The time used for each read-ahead is the time from the
+start, until the callback is fired.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Gets the time spent waiting for all read-aheads to occur.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets the time spent waiting for all read-aheads to occur.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="readop.models.results.Results.total_bytes_read">
+<code class="descname">total_bytes_read</code><a class="headerlink" href="#readop.models.results.Results.total_bytes_read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total number of bytes read during the operation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Getter:</th><td class="field-body">Gets the number of bytes read.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Setter:</th><td class="field-body">Sets the number of bytes read.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Team 26
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

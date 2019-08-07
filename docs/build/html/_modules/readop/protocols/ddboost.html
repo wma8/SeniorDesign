@@ -1,0 +1,345 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>readop.protocols.ddboost &mdash; ReadOp  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> ReadOp
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ReadOp</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>readop.protocols.ddboost</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for readop.protocols.ddboost</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Protocol for sending using dd boost stress and retrieving the results.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">readop.utility.config</span> <span class="k">as</span> <span class="nn">config</span>
+<span class="kn">from</span> <span class="nn">readop.protocols.command</span> <span class="k">import</span> <span class="n">Cmd</span>
+
+
+<div class="viewcode-block" id="StressStats"><a class="viewcode-back" href="../../../readop.protocols.ddboost.html#readop.protocols.ddboost.StressStats">[docs]</a><span class="k">class</span> <span class="nc">StressStats</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An object for storing the information recieved from a stress test.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_ras</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_ra_cbs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_ra_buf_waits</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ra_buf_wait_time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">ra_data_latency</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">avg_ra_data_latency</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_ra_out_of_seq</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the object to contain the results from the stress test.</span>
+<span class="sd">        </span>
+<span class="sd">        :param time: The time to execute the test.</span>
+<span class="sd">        :param n_ras: The number of readaheads started.</span>
+<span class="sd">        :param n_ras_cbs: The number of readaheads call backs completed.</span>
+<span class="sd">        :param n_ra_buf_waits: The number of buffer waits for readahead.</span>
+<span class="sd">        :param ra_buf_wait_time: The time spent waiting on buffers for readahead.</span>
+<span class="sd">        :param ra_data_latency: Total time spent waiting on readahead.</span>
+<span class="sd">        :param avg_ra_data_latency: Average time spent waiting on readahead.</span>
+<span class="sd">        :param n_ra_out_of_seq: The number of non-sequential readaheads.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_ras</span> <span class="o">=</span> <span class="n">n_ras</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_ra_cbs</span> <span class="o">=</span> <span class="n">n_ra_cbs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_ra_buf_waits</span> <span class="o">=</span> <span class="n">n_ra_buf_waits</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ra_buf_wait_time</span> <span class="o">=</span> <span class="n">ra_buf_wait_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ra_data_latency</span> <span class="o">=</span> <span class="n">ra_data_latency</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">avg_ra_data_latency</span> <span class="o">=</span> <span class="n">avg_ra_data_latency</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_ra_out_of_seq</span> <span class="o">=</span> <span class="n">n_ra_out_of_seq</span>
+
+<div class="viewcode-block" id="StressStats.printStats"><a class="viewcode-back" href="../../../readop.protocols.ddboost.html#readop.protocols.ddboost.StressStats.printStats">[docs]</a>    <span class="k">def</span> <span class="nf">printStats</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prints the results object out to std out.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;time: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;n_ras: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_ras</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;n_ra_cbs: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_ra_cbs</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;n_ra_buf_waits: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_ra_buf_waits</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ra_buf_wait_time: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ra_buf_wait_time</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ra_data_latency: &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ra_data_latency</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;avg_ra_data_latency: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">avg_ra_data_latency</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;n_ra_out_of_seq: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_ra_out_of_seq</span><span class="p">))</span></div>
+    
+<div class="viewcode-block" id="StressStats.getJSON"><a class="viewcode-back" href="../../../readop.protocols.ddboost.html#readop.protocols.ddboost.StressStats.getJSON">[docs]</a>    <span class="k">def</span> <span class="nf">getJSON</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the results object as a JSON Object.</span>
+<span class="sd">        </span>
+<span class="sd">        :return: The results object as a JSON Object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="StressStats.setOperationObject"><a class="viewcode-back" href="../../../readop.protocols.ddboost.html#readop.protocols.ddboost.StressStats.setOperationObject">[docs]</a>    <span class="k">def</span> <span class="nf">setOperationObject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Given an operation object, the method sets operation results to the same as this object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">operation</span><span class="o">.</span><span class="n">execution_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span>
+        <span class="n">operation</span><span class="o">.</span><span class="n">n_ras</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_ras</span>
+        <span class="n">operation</span><span class="o">.</span><span class="n">n_ra_cbs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_ra_cbs</span>
+        <span class="n">operation</span><span class="o">.</span><span class="n">n_ra_buf_waits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_ra_buf_waits</span>
+        <span class="n">operation</span><span class="o">.</span><span class="n">ra_buf_wait_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ra_buf_wait_time</span>
+        <span class="n">operation</span><span class="o">.</span><span class="n">ra_data_latency</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ra_data_latency</span>
+        <span class="n">operation</span><span class="o">.</span><span class="n">avg_ra_data_latency</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">avg_ra_data_latency</span>
+        <span class="n">operation</span><span class="o">.</span><span class="n">n_ra_out_of_seq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_ra_out_of_seq</span></div></div>
+
+<div class="viewcode-block" id="DDBStress"><a class="viewcode-back" href="../../../readop.protocols.ddboost.html#readop.protocols.ddboost.DDBStress">[docs]</a><span class="k">class</span> <span class="nc">DDBStress</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class allows you to execute the stress application</span>
+<span class="sd">    with default parameters or with parameters that are passed in.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+<div class="viewcode-block" id="DDBStress.extractData"><a class="viewcode-back" href="../../../readop.protocols.ddboost.html#readop.protocols.ddboost.DDBStress.extractData">[docs]</a>    <span class="k">def</span> <span class="nf">extractData</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the data from the output of the stress test and</span>
+<span class="sd">        sets them to an object that is stored as stats.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n_ras</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">n_ra_out_of_seq</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="n">lineArray</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lineArray</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;n_ras:&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">n_ras</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="s1">&#39;n_ra_cbs:&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">n_ra_cbs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="s1">&#39;n_ra_buf_waits:&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">n_ra_buf_waits</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="s1">&#39;ra_buf_wait_time:&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">ra_buf_wait_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="s1">&#39; ra_data_latency:&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">ra_data_latency</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="s1">&#39;avg_ra_data_latency:&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">avg_ra_data_latency</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="s1">&#39;n_ra_out_of_seq:&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">n_ra_out_of_seq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+        
+        <span class="k">if</span> <span class="n">n_ras</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;There was an error with the stress command: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmdString</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">stats</span> <span class="o">=</span> <span class="n">StressStats</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">n_ras</span><span class="p">,</span> <span class="n">n_ra_cbs</span><span class="p">,</span> <span class="n">n_ra_buf_waits</span><span class="p">,</span>
+                <span class="n">ra_buf_wait_time</span><span class="p">,</span> <span class="n">ra_data_latency</span><span class="p">,</span> <span class="n">avg_ra_data_latency</span><span class="p">,</span> <span class="n">n_ra_out_of_seq</span><span class="p">)</span> 
+        <span class="k">return</span> <span class="mi">0</span></div>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">csvReadFile</span><span class="p">,</span>
+            <span class="n">storageUnit</span><span class="p">,</span>
+            <span class="n">stressFile</span> <span class="o">=</span> <span class="s1">&#39;/opt/dell/ddboost_stress&#39;</span><span class="p">,</span>
+            <span class="n">readSize</span> <span class="o">=</span> <span class="s1">&#39;100M&#39;</span><span class="p">,</span>
+            <span class="n">blockSize</span> <span class="o">=</span> <span class="s1">&#39;1M&#39;</span><span class="p">,</span>
+            <span class="n">hostname</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_ddve_host</span><span class="p">(),</span>
+            <span class="n">username</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_ddve_username</span><span class="p">(),</span>
+            <span class="n">password</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_ddve_password</span><span class="p">()</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the class which executes the stress command and executes it.</span>
+<span class="sd">        </span>
+<span class="sd">        :param csvReadFile: The csv file that dictates the read pattern of the test.</span>
+<span class="sd">        :param storageUnit: The name of the storage unit in the ddve to execute this test in.</span>
+<span class="sd">        :param stressFile: The path to the stress application. Default is /opt/dell/ddboost_stress.</span>
+<span class="sd">        :param readSize: The size of the read. Default 100M.</span>
+<span class="sd">        :param blockSize: THe size the reads are broken down into. Default 1M.</span>
+<span class="sd">        :param hostname: The name of the ddve host.</span>
+<span class="sd">        :param username: The username to access the ddve as.</span>
+<span class="sd">        :param password: The password of the ddve user.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">readSize</span> <span class="o">=</span> <span class="n">readSize</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blockSize</span> <span class="o">=</span> <span class="n">blockSize</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">csvReadFile</span> <span class="o">=</span> <span class="n">csvReadFile</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">cmdString</span> <span class="o">=</span> <span class="p">(</span><span class="n">stressFile</span> <span class="o">+</span> <span class="s1">&#39; -r1 -z&#39;</span> <span class="o">+</span> <span class="n">readSize</span> <span class="o">+</span> <span class="s1">&#39; -b &#39;</span> <span class="o">+</span> <span class="n">blockSize</span> <span class="o">+</span> <span class="s1">&#39; -d &#39;</span> <span class="o">+</span> <span class="n">hostname</span> <span class="o">+</span>
+                <span class="s1">&#39; -u &#39;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s1">&#39; -p &#39;</span> <span class="o">+</span> <span class="n">password</span> <span class="o">+</span> <span class="s1">&#39; -s &#39;</span> <span class="o">+</span> <span class="n">storageUnit</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">csvReadFile</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cmdString</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmdString</span> <span class="o">+</span> <span class="s1">&#39; -Y &#39;</span> <span class="o">+</span> <span class="n">csvReadFile</span>
+        
+        <span class="c1">#Starts recording time</span>
+        <span class="n">startTime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        
+        <span class="n">stressCmd</span> <span class="o">=</span> <span class="n">Cmd</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmdString</span><span class="p">)</span>    
+        
+        <span class="c1">#Ends the recording of execution time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">((</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">startTime</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">stressCmd</span><span class="o">.</span><span class="n">stdout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="n">stressCmd</span><span class="o">.</span><span class="n">stderr</span>
+        <span class="c1">#print(self.output)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extractData</span><span class="p">()</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Team 26
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,321 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>readop.protocols.ddve module &mdash; ReadOp  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ReadOp
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">readop.protocols.ddve module</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ReadOp</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>readop.protocols.ddve module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/readop.protocols.ddve.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-readop.protocols.ddve">
+<span id="readop-protocols-ddve-module"></span><h1>readop.protocols.ddve module<a class="headerlink" href="#module-readop.protocols.ddve" title="Permalink to this headline">¶</a></h1>
+<p>Interactions with DDVE Parameter system by retrieving results.</p>
+<dl class="class">
+<dt id="readop.protocols.ddve.DDVEClient">
+<em class="property">class </em><code class="descclassname">readop.protocols.ddve.</code><code class="descname">DDVEClient</code><span class="sig-paren">(</span><em>ddve</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/readop/protocols/ddve.html#DDVEClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#readop.protocols.ddve.DDVEClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Handles credential management and re-authentication for ssh communication.</p>
+<dl class="method">
+<dt id="readop.protocols.ddve.DDVEClient.checkSystemStatus">
+<code class="descname">checkSystemStatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/readop/protocols/ddve.html#DDVEClient.checkSystemStatus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#readop.protocols.ddve.DDVEClient.checkSystemStatus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the message for checking system status.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">lines containing the return message from correlated command in ddve</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="readop.protocols.ddve.DDVEClient.createStorageUnit">
+<code class="descname">createStorageUnit</code><span class="sig-paren">(</span><em>su_name</em>, <em>user</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/readop/protocols/ddve.html#DDVEClient.createStorageUnit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#readop.protocols.ddve.DDVEClient.createStorageUnit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the message for creating a storage unit.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>su_name</strong> – name of this storage unit</li>
+<li><strong>user</strong> – user the storage unit is created for</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">lines containing the return message from correlated command in ddve</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="readop.protocols.ddve.DDVEClient.deleteStorageUnit">
+<code class="descname">deleteStorageUnit</code><span class="sig-paren">(</span><em>su_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/readop/protocols/ddve.html#DDVEClient.deleteStorageUnit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#readop.protocols.ddve.DDVEClient.deleteStorageUnit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the message for deleting a storage unit.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>su_name</strong> – name of this storage unit</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">lines containing the return message from correlated command in ddve</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="readop.protocols.ddve.DDVEClient.garbageCollection">
+<code class="descname">garbageCollection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/readop/protocols/ddve.html#DDVEClient.garbageCollection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#readop.protocols.ddve.DDVEClient.garbageCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the message for doing garbage collection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">lines containing the return message from correlated command in ddve</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="readop.protocols.ddve.DDVEClient.getMTrees">
+<code class="descname">getMTrees</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/readop/protocols/ddve.html#DDVEClient.getMTrees"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#readop.protocols.ddve.DDVEClient.getMTrees" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the message for retrieving the MTrees.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">lines containing the return message from correlated command in ddve</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="readop.protocols.ddve.DDVEClient.getStats">
+<code class="descname">getStats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/readop/protocols/ddve.html#DDVEClient.getStats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#readop.protocols.ddve.DDVEClient.getStats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the message for retrieving the stats data from ddve system.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">lines containing the return message from correlated command in ddve</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="readop.protocols.ddve.DDVEClient.getStorageUnits">
+<code class="descname">getStorageUnits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/readop/protocols/ddve.html#DDVEClient.getStorageUnits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#readop.protocols.ddve.DDVEClient.getStorageUnits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the message for retrieving a storage unit.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">lines containing the return message from correlated command in ddve</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="readop.protocols.ddve.DDVEClient.resetStats">
+<code class="descname">resetStats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/readop/protocols/ddve.html#DDVEClient.resetStats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#readop.protocols.ddve.DDVEClient.resetStats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the message for resetting the stats in ddve system.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">lines containing the return message from correlated command in ddve</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Team 26
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
